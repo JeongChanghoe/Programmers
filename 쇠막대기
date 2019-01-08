@@ -1,0 +1,37 @@
+#include <string>
+#include <vector>
+#include <stack>
+using namespace std;
+
+int solution(string arrangement) {
+    int answer = 0, bar_cnt = 0, razor_cnt = 0;
+    stack<char> st;
+    
+    for(int i=0; i<arrangement.length(); i++) {
+        
+        if(st.empty())
+            bar_cnt++;
+        
+        else if(arrangement[i] == ')') {
+            if(st.top() == '('){
+                bar_cnt--;
+                razor_cnt++;
+                
+                if(bar_cnt>0)
+                    answer += bar_cnt;
+            }else {
+                answer++;
+                bar_cnt--;
+            }
+        }
+        
+        else if(arrangement[i] == '(') {
+            if(st.top() == '('){
+                bar_cnt++;
+            }else
+                bar_cnt++;
+        } 
+        st.push(arrangement[i]);
+    }
+    return answer;
+}
