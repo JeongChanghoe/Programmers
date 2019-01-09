@@ -1,0 +1,55 @@
+#include <string>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+int solution(string name) {
+    int answer = 0, index = 0;
+    int tmp = 0, way = 0;
+    string begin = "";
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // M까지는 다음 알파벳, M이후는 이전 알파벳 이동이 더 빠르다
+    
+    // begin 초기화
+    for(int i=0; i<name.length(); i++){
+        begin += 'A';
+    }
+
+    while(begin != name) {
+        // 한 자리의 알파벳 이름 완성되면 다음 인덱스로
+        if(name[index] == begin[index]){
+            if(index == 0) {
+                if(name[index+1] == begin[index+1]) {
+                    way = 1;
+                    index = name.length()-1;
+                }
+                else {
+                    index++;
+                }
+            }
+            else {
+                if(way == 1) // 왼쪽으로
+                    index--;
+                else // 오른쪽으로
+                    index++;
+            }
+                
+            answer++; 
+        }
+        
+        else { // 한 자리의 이름이 완성되지 않음
+            for(int i=1; i<=25; i++) {
+                if(name[index]==alphabet[i]){
+                    tmp = i;
+                    begin[index] = alphabet[i];
+                    break;
+                }                    
+            }
+            
+            if(tmp>=1 && tmp<=12)
+                answer += tmp;
+            else
+                answer += 26-tmp;
+        }
+    }
+    return answer;
+}
