@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<int> solution(vector<int> arr) {
+    vector<int> answer;
+    int min = 99999999;
+    int count = 0;
+    
+    if(arr.size() == 1) {
+        answer.push_back(-1);   
+    }
+    else {
+        for(int i=0; i<arr.size(); i++) {
+            if(min > arr[i])
+                min = arr[i];
+        }
+        
+        while(count!=arr.size()) {
+            if(min == arr[count])
+                count++;
+            else
+                answer.push_back(arr[count++]);
+                
+        }
+    }
+    return answer;
+}
