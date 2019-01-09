@@ -1,0 +1,50 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(string s) {
+    string answer = "";
+    string cap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    string low = "abcdefghijklmnopqrstuvwxyz";
+    int count = 0;
+    
+    for(int i=0; i<s.length(); i++) {
+        if(s[i] == ' '){
+            count = 0;
+            answer += ' ';
+        }
+        
+        else if(count%2 == 0) {
+            for(int j=0; j<26; j++){
+                if(s[i]==low[j]){
+                    answer+=cap[j];
+                    count++;
+                    break;
+                }
+                else if(s[i]==cap[j]){
+                    answer+=cap[j];
+                    count++;
+                    break;
+                }
+            }
+        }
+        
+        else {
+            for(int j=0; j<26; j++){
+                if(s[i]==cap[j]){
+                    answer+=low[j];
+                    count++;
+                    break;
+                }
+                else if(s[i]==low[j]){
+                    answer+=low[j];
+                    count++;
+                    break;
+                }
+            }
+        }
+        
+    }
+    return answer;
+}
