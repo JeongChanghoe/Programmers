@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(int a, int b) {
+    string answer = "";
+    int count = 0;
+    int month[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    string day[7] = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+    
+    while(a!=1) {
+        count+=month[a-2];
+        a--;
+    }
+    
+    count+=b;
+    count%=7;
+    count-=3;
+    if(count > 6)
+        count%=7;
+    else if(count < 0)
+        count+=7;
+    
+    printf("%d", count);
+    answer = day[count];
+    return answer;
+}
