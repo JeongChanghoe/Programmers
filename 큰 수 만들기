@@ -1,0 +1,23 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(string number, int k) {
+    string answer = "";
+    int max = 0, tmp = 0, index = 0;
+    
+    while(number.size()!= k){
+        for(int i=index; i<=k; i++){
+            if(number[i] > max){
+                max = number[i];
+                tmp = i;
+            }
+        }
+        index = tmp+1;
+        answer+=max;
+        max=0;
+        k++;
+    }
+    return answer;
+}
