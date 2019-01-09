@@ -1,0 +1,32 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(string s, int n) {
+    string answer = "";
+    string cap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    string low = "abcdefghijklmnopqrstuvwxyz";
+    
+    for(int i = 0; i<s.length(); i++) {
+        for(int j=0; j<26; j++) {
+            if(cap[j] == s[i]){
+                j+=n;
+                if(j >= 26)
+                    j%=26;
+                answer += cap[j];
+                break;
+            }
+            else if(low[j] == s[i]){
+                j+=n;
+                if(j >= 26)
+                    j%=26;
+                answer += low[j];
+                break;
+            }
+            if(j==25)
+                answer += " ";
+        }
+    }
+    return answer;
+}
